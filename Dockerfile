@@ -26,4 +26,5 @@ EXPOSE 3000 7456 4096
 
 # 8. Start both the Daemon and the Web Dashboard concurrently
 # tools-dev handles orchestrating the background processes.
-CMD pnpm --filter @open-design/daemon dev & pnpm --filter @open-design/web dev & wait
+# 8. Start with the "cors-bypass" flag and force global listening
+CMD pnpm --filter @open-design/daemon dev -- --host 0.0.0.0 --cors "*" & pnpm --filter @open-design/web dev & wait
