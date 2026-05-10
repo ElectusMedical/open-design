@@ -1,7 +1,7 @@
-# Use the latest Node.js version as the base
-FROM node:22-bookworm
+# 1. Use Node 24 (The only version this repo supports)
+FROM node:24-bookworm
 
-# 1. Install system tools needed for building software
+# 2. Install system tools needed for building
 RUN apt-get update && apt-get install -y \
     git \
     python3 \
@@ -9,24 +9,21 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Install OpenCode CLI globally so the design tool can "see" it
-# This makes 'opencode' a command the system understands
-RUN npm install -g opencode-ai
+# 3. Install OpenCode CLI and pnpm globally
+RUN npm install -g opencode-ai pnpm
 
-# 3. Set the working directory inside the container
+# 4. Set working directory
 WORKDIR /app
 
-# 4. Copy the files from your GitHub fork into the container
+# 5. Copy all files from GitHub
 COPY . .
 
-# 5. Install the Design Tool's specific requirements
-# We use pnpm because it's faster and what this project prefers
-RUN npm install -g pnpm && pnpm install
+# 6. Install project dependencies
+RUN pnpm install
 
-# 6. Skip the build (not needed for this repo) 
-# and go straight to exposing ports
+# 7. EXPOSE PORTS (The ones you specified)
 EXPOSE 3000 7456 4096
 
-# 7. Start the daemon and web interface
-# We use 'dev' because this repo is designed as a live-environment tool
-CMD ["pnpm", "run", "dev"]
+# 8. Start the specific Web Dashboard
+# We use the filter because the root folder has no "dev" or "start" script.
+CMD ["pnpm", "--filter", "@open-design/web", "dev"]
