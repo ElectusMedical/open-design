@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 # 2. Install OpenCode CLI globally so the design tool can "see" it
 # This makes 'opencode' a command the system understands
-RUN npm install -g @opencode/cli
+RUN npm install -g opencode-ai
 
 # 3. Set the working directory inside the container
 WORKDIR /app
