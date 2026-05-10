@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# 3. Install OpenCode CLI and pnpm globally
-RUN npm install -g opencode-ai pnpm
+# 3. Install the brains: OpenCode, Claude, Gemini, and the OpenAI official CLI
+RUN npm install -g pnpm opencode-ai @anthropic-ai/claude-code @google/gemini-cli openai
 
 # 4. Set working directory
 WORKDIR /app
