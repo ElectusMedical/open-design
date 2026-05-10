@@ -24,6 +24,6 @@ RUN pnpm install
 # 7. EXPOSE PORTS (The ones you specified)
 EXPOSE 3000 7456 4096
 
-# 8. Start the specific Web Dashboard
-# We use the filter because the root folder has no "dev" or "start" script.
-CMD ["pnpm", "--filter", "@open-design/web", "dev"]
+# 8. Start both the Daemon and the Web Dashboard concurrently
+# tools-dev handles orchestrating the background processes.
+CMD ["pnpm", "tools-dev", "run", "web"]
