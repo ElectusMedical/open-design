@@ -23,13 +23,10 @@ COPY . .
 # We use pnpm because it's faster and what this project prefers
 RUN npm install -g pnpm && pnpm install
 
-# 6. Build the web application
-RUN pnpm run build
-
-# 7. Tell the container which ports to open
-# 3000 is for the Website, 7456 is for the MCP bridge to your IDE
+# 6. Skip the build (not needed for this repo) 
+# and go straight to exposing ports
 EXPOSE 3000 7456 4096
 
-# 8. Start the engine
-# This launches the Open Design interface
-CMD ["pnpm", "run", "start"]
+# 7. Start the daemon and web interface
+# We use 'dev' because this repo is designed as a live-environment tool
+CMD ["pnpm", "run", "dev"]
