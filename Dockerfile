@@ -26,4 +26,4 @@ EXPOSE 3000 7456 4096
 
 # 8. Start both the Daemon and the Web Dashboard concurrently
 # tools-dev handles orchestrating the background processes.
-CMD ["pnpm", "tools-dev", "run", "web"]
+CMD pnpm --filter @open-design/daemon dev & pnpm --filter @open-design/web dev & wait
