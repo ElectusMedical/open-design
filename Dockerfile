@@ -28,7 +28,7 @@ RUN pnpm run build
 
 # 7. Tell the container which ports to open
 # 3000 is for the Website, 7456 is for the MCP bridge to your IDE
-EXPOSE 3000 7456
+EXPOSE 3000 7456 4096
 
 # 8. Start the engine
 # This launches the Open Design interface
